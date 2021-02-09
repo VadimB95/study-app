@@ -1,0 +1,3 @@
+include ':domain'
+include ':android'
+rootProject.name = "Study App"
