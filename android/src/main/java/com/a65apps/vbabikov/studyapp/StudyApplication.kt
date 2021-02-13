@@ -2,6 +2,8 @@ package com.a65apps.vbabikov.studyapp
 
 import android.app.Application
 import com.a65apps.vbabikov.studyapp.di.DaggerAppComponent
+import io.reactivex.Completable
+import io.reactivex.schedulers.Schedulers
 import timber.log.Timber
 
 class StudyApplication : Application() {
@@ -12,10 +14,14 @@ class StudyApplication : Application() {
         delayedInit()
     }
 
-    // TODO make async
     private fun delayedInit() {
         INSTANCE = this
-        Timber.plant(Timber.DebugTree())
+
+        Completable.fromRunnable {
+            Timber.plant(Timber.DebugTree())
+        }
+            .subscribeOn(Schedulers.computation())
+            .subscribe()
     }
 
     companion object {
