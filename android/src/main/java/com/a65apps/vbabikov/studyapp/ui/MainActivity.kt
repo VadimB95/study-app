@@ -1,8 +1,11 @@
-package com.a65apps.vbabikov.studyapp
+package com.a65apps.vbabikov.studyapp.ui
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import com.a65apps.vbabikov.studyapp.R
 import com.a65apps.vbabikov.studyapp.Screens.HomeFragmentScreen
+import com.a65apps.vbabikov.studyapp.StudyApplication
+import com.a65apps.vbabikov.studyapp.navigation.BackButtonListener
 import com.github.terrakok.cicerone.Command
 import com.github.terrakok.cicerone.Navigator
 import com.github.terrakok.cicerone.NavigatorHolder
@@ -38,5 +41,14 @@ class MainActivity : AppCompatActivity() {
         navigatorHolder.removeNavigator()
         super.onPause()
         Timber.d("onPause()")
+    }
+
+    override fun onBackPressed() {
+        val fragment = supportFragmentManager.findFragmentById(R.id.main_container)
+        if (fragment != null && fragment is BackButtonListener) {
+            fragment.onBackPressed()
+        } else {
+            super.onBackPressed()
+        }
     }
 }
