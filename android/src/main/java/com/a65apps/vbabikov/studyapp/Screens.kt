@@ -1,9 +1,9 @@
 package com.a65apps.vbabikov.studyapp
 
 import android.content.Intent
-import com.a65apps.vbabikov.studyapp.ui.CalculatorFragment
-import com.a65apps.vbabikov.studyapp.ui.HomeFragment
 import com.a65apps.vbabikov.studyapp.ui.MainActivity
+import com.a65apps.vbabikov.studyapp.ui.calculator.CalculatorFragment
+import com.a65apps.vbabikov.studyapp.ui.home.HomeFragment
 import com.github.terrakok.cicerone.androidx.ActivityScreen
 import com.github.terrakok.cicerone.androidx.FragmentScreen
 

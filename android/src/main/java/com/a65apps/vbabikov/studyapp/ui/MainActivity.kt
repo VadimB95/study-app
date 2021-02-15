@@ -21,8 +21,8 @@ class MainActivity : AppCompatActivity() {
     private val navigator: Navigator = AppNavigator(this, R.id.main_container)
 
     override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
         StudyApplication.INSTANCE.appComponent.inject(this)
+        super.onCreate(savedInstanceState)
         Timber.d("onCreate(), savedInstanceState = $savedInstanceState")
         setContentView(R.layout.activity_main)
 

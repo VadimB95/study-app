@@ -1,6 +1,7 @@
 <resources>
     <string name="app_name">Study App</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="home_calc_button_label">Калькулятор</string>
+    <string name="home_task1_title">1. Создание &quot;главного&quot; экрана</string>
+    <string name="home_calc_button_label">2. Калькулятор</string>
+    <string name="home_toolbar_title">Главный экран</string>
+    <string name="calc_toolbar_title">Калькулятор</string>
 </resources>
