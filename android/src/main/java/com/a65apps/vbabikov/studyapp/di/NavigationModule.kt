@@ -6,7 +6,6 @@ import com.github.terrakok.cicerone.NavigatorHolder
 import com.github.terrakok.cicerone.Router
 import dagger.Module
 import dagger.Provides
-import timber.log.Timber
 import javax.inject.Singleton
 
 @Module
@@ -16,14 +15,12 @@ class NavigationModule {
     @Provides
     @Singleton
     fun provideRouter(): Router {
-        Timber.d("provideRouter()")
         return cicerone.router
     }
 
     @Provides
     @Singleton
     fun provideNavigatorHolder(): NavigatorHolder {
-        Timber.d("provideNavigatorHolder()")
         return cicerone.getNavigatorHolder()
     }
 }
