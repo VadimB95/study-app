@@ -4,6 +4,6 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 class CalculatorFragmentScreen : FragmentScreen(
     fragmentCreator = {
-        CalculatorFragment()
+        CalculatorFragment.newInstance()
     }
 )

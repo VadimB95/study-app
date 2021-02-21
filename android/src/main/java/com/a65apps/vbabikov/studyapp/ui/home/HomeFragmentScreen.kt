@@ -4,6 +4,6 @@ import com.github.terrakok.cicerone.androidx.FragmentScreen
 
 class HomeFragmentScreen : FragmentScreen(
     fragmentCreator = {
-        HomeFragment()
+        HomeFragment.newInstance()
     }
 )

@@ -8,7 +8,6 @@ import timber.log.Timber
 
 @HiltAndroidApp
 class StudyApplication : Application() {
-//    val appComponent = DaggerAppComponent.create()
 
     override fun onCreate() {
         super.onCreate()
@@ -16,16 +15,10 @@ class StudyApplication : Application() {
     }
 
     private fun delayedInit() {
-        INSTANCE = this
-
         Completable.fromRunnable {
             Timber.plant(Timber.DebugTree())
         }
             .subscribeOn(Schedulers.computation())
             .subscribe()
-    }
-
-    companion object {
-        lateinit var INSTANCE: StudyApplication
     }
 }

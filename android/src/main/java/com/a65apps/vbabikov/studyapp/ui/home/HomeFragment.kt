@@ -15,7 +15,10 @@ class HomeFragment : Fragment(), BackButtonListener {
     private val viewModel: HomeViewModel by viewModels()
 
     private var _binding: FragmentHomeBinding? = null
-    private val binding get() = _binding!!
+    private val binding
+        get() = requireNotNull(_binding) {
+            "Cannot be called before onCreateView() and after onDestroyView()"
+        }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,5 +43,9 @@ class HomeFragment : Fragment(), BackButtonListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    companion object {
+        fun newInstance() = HomeFragment()
     }
 }
