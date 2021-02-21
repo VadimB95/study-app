@@ -1,31 +1,27 @@
 package com.a65apps.vbabikov.studyapp.ui.home
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.a65apps.vbabikov.studyapp.StudyApplication
 import com.a65apps.vbabikov.studyapp.databinding.FragmentHomeBinding
 import com.a65apps.vbabikov.studyapp.navigation.BackButtonListener
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class HomeFragment : Fragment(), BackButtonListener {
     private val viewModel: HomeViewModel by viewModels()
 
-    private lateinit var binding: FragmentHomeBinding
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        StudyApplication.INSTANCE.appComponent.inject(viewModel)
-    }
+    private var _binding: FragmentHomeBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentHomeBinding.inflate(inflater)
+        _binding = FragmentHomeBinding.inflate(inflater)
         return binding.root
     }
 
@@ -39,5 +35,10 @@ class HomeFragment : Fragment(), BackButtonListener {
 
     override fun onBackPressed() {
         viewModel.navigateBack()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

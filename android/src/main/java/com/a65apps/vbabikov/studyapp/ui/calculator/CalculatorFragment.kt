@@ -1,31 +1,27 @@
 package com.a65apps.vbabikov.studyapp.ui.calculator
 
-import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
-import com.a65apps.vbabikov.studyapp.StudyApplication
 import com.a65apps.vbabikov.studyapp.databinding.FragmentCalculatorBinding
 import com.a65apps.vbabikov.studyapp.navigation.BackButtonListener
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class CalculatorFragment : Fragment(), BackButtonListener {
     private val viewModel: CalculatorViewModel by viewModels()
 
-    private lateinit var binding: FragmentCalculatorBinding
-
-    override fun onAttach(context: Context) {
-        super.onAttach(context)
-        StudyApplication.INSTANCE.appComponent.inject(viewModel)
-    }
+    private var _binding: FragmentCalculatorBinding? = null
+    private val binding get() = _binding!!
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = FragmentCalculatorBinding.inflate(inflater)
+        _binding = FragmentCalculatorBinding.inflate(inflater)
         return binding.root
     }
 
@@ -39,5 +35,10 @@ class CalculatorFragment : Fragment(), BackButtonListener {
 
     override fun onBackPressed() {
         viewModel.navigateBack()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }
