@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.a65apps.vbabikov.studyapp.databinding.FragmentCalculatorBinding
 import com.a65apps.vbabikov.studyapp.navigation.BackButtonListener
+import com.a65apps.vbabikov.studyapp.utils.KeyboardUtils.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -31,8 +32,12 @@ class CalculatorFragment : Fragment(), BackButtonListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        binding.toolbarCalc.setNavigationOnClickListener {
-            viewModel.navigateBack()
+        with(binding) {
+            toolbarCalc.setNavigationOnClickListener {
+                viewModel.navigateBack()
+            }
+            edittextCalc.requestFocus()
+            showKeyboard(edittextCalc)
         }
     }
 
