@@ -7,7 +7,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class CalculatorViewModel @Inject constructor(
-    private val router: Router
-) : ViewModel() {
+    private val router: Router,
+
+    ) : ViewModel() {
     fun navigateBack() = router.exit()
 }
