@@ -10,7 +10,7 @@ sealed class CalculatorUiEvent {
 
     data class Divide(val operand1: Double) : CalculatorUiEvent()
 
-    data class Result(val operand1: Double) : CalculatorUiEvent()
+    data class Result(val operand2: Double) : CalculatorUiEvent()
 
     object Clear : CalculatorUiEvent()
 }

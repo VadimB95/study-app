@@ -44,14 +44,23 @@ class CalculatorFragment : ObservableSourceFragment<CalculatorUiEvent>(), BackBu
             toolbarCalc.setNavigationOnClickListener {
                 viewModel.navigateBack()
             }
+            buttonCalcAdd.setOnClickListener {
+                onNext(CalculatorUiEvent.Add(getInputFromScreen()))
+            }
             buttonCalcClear.setOnClickListener {
                 onNext(CalculatorUiEvent.Clear)
+            }
+            buttonCalcResult.setOnClickListener {
+                onNext(CalculatorUiEvent.Result(getInputFromScreen()))
             }
             edittextCalc.requestFocus()
             showKeyboard(edittextCalc)
         }
         calcBinding.setup(this)
     }
+
+    private fun FragmentCalculatorBinding.getInputFromScreen() =
+        edittextCalc.text.toString().toDouble()
 
     override fun onBackPressed() {
         viewModel.navigateBack()

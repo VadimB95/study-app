@@ -10,7 +10,7 @@ sealed class CalculatorWish {
 
     data class Divide(val operand1: Double) : CalculatorWish()
 
-    data class Result(val operand1: Double) : CalculatorWish()
+    data class Result(val operand2: Double) : CalculatorWish()
 
     object Clear : CalculatorWish()
 
