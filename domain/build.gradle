@@ -1,6 +1,7 @@
 plugins {
     id 'java-library'
     id 'kotlin'
+    id 'kotlin-kapt'
 }
 
 java {
@@ -10,9 +11,14 @@ java {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+
+    // MviCore
     implementation 'com.github.badoo.mvicore:mvicore:1.2.6'
 
     // RxJava
     implementation 'io.reactivex.rxjava2:rxjava:2.2.10'
 
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$hilt_version"
+    kapt "com.google.dagger:hilt-compiler:$hilt_version"
 }

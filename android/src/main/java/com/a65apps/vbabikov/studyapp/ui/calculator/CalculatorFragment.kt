@@ -4,15 +4,20 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.a65apps.vbabikov.studyapp.common.ObservableSourceFragment
 import com.a65apps.vbabikov.studyapp.databinding.FragmentCalculatorBinding
 import com.a65apps.vbabikov.studyapp.navigation.BackButtonListener
+import com.a65apps.vbabikov.studyapp.ui.calculator.event.CalculatorUiEvent
+import com.a65apps.vbabikov.studyapp.ui.calculator.viewstate.CalculatorViewState
 import com.a65apps.vbabikov.studyapp.utils.KeyboardUtils.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
+import io.reactivex.functions.Consumer
+import javax.inject.Inject
 
 @AndroidEntryPoint
-class CalculatorFragment : Fragment(), BackButtonListener {
+class CalculatorFragment : ObservableSourceFragment<CalculatorUiEvent>(), BackButtonListener,
+    Consumer<CalculatorViewState> {
     private val viewModel: CalculatorViewModel by viewModels()
 
     private var _binding: FragmentCalculatorBinding? = null
@@ -20,6 +25,9 @@ class CalculatorFragment : Fragment(), BackButtonListener {
         get() = requireNotNull(_binding) {
             "Cannot be called before onCreateView() and after onDestroyView()"
         }
+
+    @Inject
+    lateinit var calcBinding: CalculatorBindings
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,9 +44,13 @@ class CalculatorFragment : Fragment(), BackButtonListener {
             toolbarCalc.setNavigationOnClickListener {
                 viewModel.navigateBack()
             }
+            buttonCalcClear.setOnClickListener {
+                onNext(CalculatorUiEvent.Clear)
+            }
             edittextCalc.requestFocus()
             showKeyboard(edittextCalc)
         }
+        calcBinding.setup(this)
     }
 
     override fun onBackPressed() {
@@ -48,6 +60,12 @@ class CalculatorFragment : Fragment(), BackButtonListener {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun accept(viewState: CalculatorViewState?) {
+        viewState?.let {
+            binding.edittextCalc.setText(it.screenText)
+        }
     }
 
     companion object {

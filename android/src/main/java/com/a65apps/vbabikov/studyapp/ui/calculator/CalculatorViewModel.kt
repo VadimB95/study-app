@@ -11,4 +11,5 @@ class CalculatorViewModel @Inject constructor(
 
     ) : ViewModel() {
     fun navigateBack() = router.exit()
+
 }
