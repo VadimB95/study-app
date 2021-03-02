@@ -1,14 +1,16 @@
 package com.a65apps.vbabikov.studyapp.ui.calculator
 
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.viewModels
+import com.a65apps.vbabikov.studyapp.CalculatorWish
 import com.a65apps.vbabikov.studyapp.common.ObservableSourceFragment
 import com.a65apps.vbabikov.studyapp.databinding.FragmentCalculatorBinding
 import com.a65apps.vbabikov.studyapp.navigation.BackButtonListener
-import com.a65apps.vbabikov.studyapp.ui.calculator.event.CalculatorUiEvent
 import com.a65apps.vbabikov.studyapp.ui.calculator.viewstate.CalculatorViewState
 import com.a65apps.vbabikov.studyapp.utils.KeyboardUtils.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
@@ -16,7 +18,7 @@ import io.reactivex.functions.Consumer
 import javax.inject.Inject
 
 @AndroidEntryPoint
-class CalculatorFragment : ObservableSourceFragment<CalculatorUiEvent>(), BackButtonListener,
+class CalculatorFragment : ObservableSourceFragment<CalculatorWish>(), BackButtonListener,
     Consumer<CalculatorViewState> {
     private val viewModel: CalculatorViewModel by viewModels()
 
@@ -40,27 +42,70 @@ class CalculatorFragment : ObservableSourceFragment<CalculatorUiEvent>(), BackBu
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        calcBinding.setup(this)
+        initViews()
+
+    }
+
+    private fun initViews() {
         with(binding) {
             toolbarCalc.setNavigationOnClickListener {
                 viewModel.navigateBack()
             }
             buttonCalcAdd.setOnClickListener {
-                onNext(CalculatorUiEvent.Add(getInputFromScreen()))
+                onNext(CalculatorWish.Add)
             }
-            buttonCalcClear.setOnClickListener {
-                onNext(CalculatorUiEvent.Clear)
+            buttonCalcSub.setOnClickListener {
+                onNext(CalculatorWish.Subtract)
+            }
+            buttonCalcMult.setOnClickListener {
+                onNext(CalculatorWish.Multiply)
+            }
+            buttonCalcDiv.setOnClickListener {
+                onNext(CalculatorWish.Divide)
             }
             buttonCalcResult.setOnClickListener {
-                onNext(CalculatorUiEvent.Result(getInputFromScreen()))
+                onNext(CalculatorWish.Result)
             }
+            buttonCalcClear.setOnClickListener {
+                onNext(CalculatorWish.Clear)
+            }
+
+            edittextCalc.addTextChangedListener(object : TextWatcher {
+                private var start = 0
+                private var count = 0
+
+                override fun beforeTextChanged(
+                    s: CharSequence?,
+                    start: Int,
+                    count: Int,
+                    after: Int
+                ) {
+                    // Not used
+                }
+
+                override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
+                    this.start = start
+                    this.count = count
+                }
+
+                override fun afterTextChanged(s: Editable?) {
+                    onNext(
+                        CalculatorWish.Input(
+                            screenTextInput = s.toString(),
+                            start = start,
+                            count = count
+                        )
+                    )
+                }
+            }
+            )
+            // todo не скрывается клавиатура
+            // todo придумать как корректно работать с clear
             edittextCalc.requestFocus()
             showKeyboard(edittextCalc)
         }
-        calcBinding.setup(this)
     }
-
-    private fun FragmentCalculatorBinding.getInputFromScreen() =
-        edittextCalc.text.toString().toDouble()
 
     override fun onBackPressed() {
         viewModel.navigateBack()
@@ -71,9 +116,17 @@ class CalculatorFragment : ObservableSourceFragment<CalculatorUiEvent>(), BackBu
         _binding = null
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        calcBinding.binder.dispose()
+    }
+
     override fun accept(viewState: CalculatorViewState?) {
         viewState?.let {
-            binding.edittextCalc.setText(it.screenText)
+            val edittextCalc = binding.edittextCalc
+            if (it.screenText != edittextCalc.text.toString())
+                edittextCalc.setText(it.screenText)
+            edittextCalc.setSelection(edittextCalc.text?.length ?: 0)
         }
     }
 

@@ -124,7 +124,6 @@
                 android:layout_height="wrap_content"
                 android:cursorVisible="false"
                 android:inputType="numberSigned|numberDecimal"
-                android:maxLength="15"
                 android:textAlignment="textEnd"
                 android:textSize="30sp"
                 android:textStyle="bold"

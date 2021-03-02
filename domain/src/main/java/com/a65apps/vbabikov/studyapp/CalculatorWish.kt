@@ -2,17 +2,21 @@ package com.a65apps.vbabikov.studyapp
 
 sealed class CalculatorWish {
 
-    data class Add(val operand1: Double) : CalculatorWish()
+    data class Input(
+        val screenTextInput: String,
+        val start: Int,
+        val count: Int
+    ) : CalculatorWish()
 
-    data class Subtract(val operand1: Double) : CalculatorWish()
+    object Add : CalculatorWish()
 
-    data class Multiply(val operand1: Double) : CalculatorWish()
+    object Subtract : CalculatorWish()
 
-    data class Divide(val operand1: Double) : CalculatorWish()
+    object Multiply : CalculatorWish()
 
-    data class Result(val operand2: Double) : CalculatorWish()
+    object Divide : CalculatorWish()
+
+    object Result : CalculatorWish()
 
     object Clear : CalculatorWish()
-
-
 }

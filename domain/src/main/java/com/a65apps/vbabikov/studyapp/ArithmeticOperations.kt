@@ -1,6 +1,6 @@
 package com.a65apps.vbabikov.studyapp
 
-enum class CalculatorOperations {
+enum class ArithmeticOperations {
     ADD,
     SUBTRACT,
     MULTIPLY,
