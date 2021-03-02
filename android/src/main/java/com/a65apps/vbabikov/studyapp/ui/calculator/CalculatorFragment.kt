@@ -15,6 +15,7 @@ import com.a65apps.vbabikov.studyapp.ui.calculator.viewstate.CalculatorViewState
 import com.a65apps.vbabikov.studyapp.utils.KeyboardUtils.showKeyboard
 import dagger.hilt.android.AndroidEntryPoint
 import io.reactivex.functions.Consumer
+import timber.log.Timber
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -42,8 +43,8 @@ class CalculatorFragment : ObservableSourceFragment<CalculatorWish>(), BackButto
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        calcBinding.setup(this)
         initViews()
+        calcBinding.setup(this)
 
     }
 
@@ -74,6 +75,11 @@ class CalculatorFragment : ObservableSourceFragment<CalculatorWish>(), BackButto
             edittextCalc.addTextChangedListener(object : TextWatcher {
                 private var start = 0
                 private var count = 0
+                private var isClear = true
+
+                init {
+                    Timber.d("TextWatcher init()")
+                }
 
                 override fun beforeTextChanged(
                     s: CharSequence?,
@@ -90,6 +96,7 @@ class CalculatorFragment : ObservableSourceFragment<CalculatorWish>(), BackButto
                 }
 
                 override fun afterTextChanged(s: Editable?) {
+
                     onNext(
                         CalculatorWish.Input(
                             screenTextInput = s.toString(),
@@ -112,13 +119,13 @@ class CalculatorFragment : ObservableSourceFragment<CalculatorWish>(), BackButto
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
     }
 
     override fun onDestroy() {
-        super.onDestroy()
         calcBinding.binder.dispose()
+        super.onDestroy()
     }
 
     override fun accept(viewState: CalculatorViewState?) {

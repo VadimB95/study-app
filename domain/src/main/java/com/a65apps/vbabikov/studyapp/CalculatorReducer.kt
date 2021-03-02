@@ -13,7 +13,7 @@ class CalculatorReducer : Reducer<CalculatorState, CalculatorEffect> {
                 } else {
                     effect.screenTextInput
                 },
-                requireOverrideInput = false
+                requireOverrideInput = if (state.screenText == effect.screenTextInput) state.requireOverrideInput else false
             )
 
             is CalculatorEffect.Add -> state.copy(

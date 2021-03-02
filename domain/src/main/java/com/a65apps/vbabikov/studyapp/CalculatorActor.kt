@@ -68,19 +68,5 @@ class CalculatorActor : Actor<CalculatorState, CalculatorAction, CalculatorEffec
         CalculatorAction.Result -> Observable.just(
             CalculatorEffect.ParseOperand2
         )
-
-        //todo delete
-//            is LoadNewData -> {
-//                if (!state.isLoading) {
-//                    service
-//                        .observeOn(AndroidSchedulers.mainThread())
-//                        .map { FinishedWithSuccess(payload = it) as Effect }
-//                        .startWith(StartedLoading)
-//                        .onErrorReturn { FinishedWithError(it) }
-//                }
-//                else {
-//                    Observable.empty()
-//                }
-//            }
     }
 }

@@ -41,8 +41,8 @@ class HomeFragment : Fragment(), BackButtonListener {
     }
 
     override fun onDestroyView() {
-        super.onDestroyView()
         _binding = null
+        super.onDestroyView()
     }
 
     companion object {
