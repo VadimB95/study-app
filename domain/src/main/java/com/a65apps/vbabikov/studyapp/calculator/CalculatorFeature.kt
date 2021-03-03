@@ -1,4 +1,4 @@
-package com.a65apps.vbabikov.studyapp
+package com.a65apps.vbabikov.studyapp.calculator
 
 import com.badoo.mvicore.feature.BaseFeature
 import javax.inject.Inject

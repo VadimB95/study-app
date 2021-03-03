@@ -1,4 +1,4 @@
-package com.a65apps.vbabikov.studyapp
+package com.a65apps.vbabikov.studyapp.calculator
 
 data class CalculatorState(
     val operand1: Double = 0.0,

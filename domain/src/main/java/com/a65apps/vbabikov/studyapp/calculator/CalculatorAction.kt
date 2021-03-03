@@ -1,4 +1,4 @@
-package com.a65apps.vbabikov.studyapp
+package com.a65apps.vbabikov.studyapp.calculator
 
 sealed class CalculatorAction {
 
@@ -24,3 +24,8 @@ sealed class CalculatorAction {
 
     object ParseOperand2 : CalculatorAction()
 }
+
+// todo 1 BigDecimal
+// 2 domain
+// 3 layout
+// 4 keyboard

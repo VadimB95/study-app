@@ -1,11 +1,11 @@
 package com.a65apps.vbabikov.studyapp.common
 
-import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModel
 import io.reactivex.ObservableSource
 import io.reactivex.Observer
 import io.reactivex.subjects.PublishSubject
 
-abstract class ObservableSourceFragment<T> : Fragment(), ObservableSource<T> {
+abstract class ObservableSourceViewModel<T> : ViewModel(), ObservableSource<T> {
 
     private val source = PublishSubject.create<T>()
 
