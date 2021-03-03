@@ -24,8 +24,3 @@ sealed class CalculatorAction {
 
     object ParseOperand2 : CalculatorAction()
 }
-
-// todo 1 BigDecimal
-// 2 domain
-// 3 layout
-// 4 keyboard

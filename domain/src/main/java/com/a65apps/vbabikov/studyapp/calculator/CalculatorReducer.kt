@@ -1,7 +1,11 @@
 package com.a65apps.vbabikov.studyapp.calculator
 
 import com.badoo.mvicore.element.Reducer
+import java.math.BigDecimal
+import java.math.RoundingMode
 import java.text.DecimalFormat
+import java.text.DecimalFormatSymbols
+import java.util.*
 
 class CalculatorReducer : Reducer<CalculatorState, CalculatorEffect> {
 
@@ -13,7 +17,9 @@ class CalculatorReducer : Reducer<CalculatorState, CalculatorEffect> {
                 } else {
                     effect.screenTextInput
                 },
-                requireOverrideInput = if (state.screenText == effect.screenTextInput) state.requireOverrideInput else false
+                requireOverrideInput = if (screenTextNotChanged(state, effect)) {
+                    state.requireOverrideInput
+                } else false
             )
 
             is CalculatorEffect.Add -> state.copy(
@@ -52,7 +58,7 @@ class CalculatorReducer : Reducer<CalculatorState, CalculatorEffect> {
                         state.operand1 * effect.operand2
                     )
                     ArithmeticOperations.DIVIDE -> formatResult(
-                        state.operand1 / effect.operand2
+                        state.operand1.divide(effect.operand2, 8, RoundingMode.HALF_EVEN)
                     )
                     else -> state.screenText
                 },
@@ -60,7 +66,7 @@ class CalculatorReducer : Reducer<CalculatorState, CalculatorEffect> {
             )
 
             CalculatorEffect.Clear -> state.copy(
-                operand1 = 0.0,
+                operand1 = BigDecimal.ZERO,
                 pendingOperation = null,
                 screenText = "0",
                 requireOverrideInput = true
@@ -70,10 +76,19 @@ class CalculatorReducer : Reducer<CalculatorState, CalculatorEffect> {
             CalculatorEffect.ParseOperand2 -> state.copy()
 
             CalculatorEffect.ParseScreenTextError -> state.copy(
-                screenText = "Err"
+                screenText = "Err",
+                requireOverrideInput = true
             )
         }
-}
 
-private fun formatResult(result: Double) =
-    DecimalFormat("#.########").format(result)
+    private fun screenTextNotChanged(
+        state: CalculatorState,
+        effect: CalculatorEffect.Input
+    ) = state.screenText == effect.screenTextInput
+
+    private fun formatResult(result: BigDecimal): String {
+        val df = DecimalFormat("#.########")
+        df.decimalFormatSymbols = DecimalFormatSymbols.getInstance(Locale.US)
+        return df.format(result)
+    }
+}

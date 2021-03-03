@@ -9,7 +9,7 @@ object KeyboardUtils {
         view?.also {
             if (view.requestFocus()) {
                 val inputMethodManager =
-                        view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                    view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
                 inputMethodManager.toggleSoftInput(InputMethodManager.SHOW_IMPLICIT, 0)
             }
         }
@@ -18,10 +18,10 @@ object KeyboardUtils {
     fun hideKeyboard(view: View?) {
         view?.also {
             val inputMethodManager =
-                    view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                view.context.getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(
-                    view.windowToken,
-                    0
+                view.windowToken,
+                0
             )
         }
     }

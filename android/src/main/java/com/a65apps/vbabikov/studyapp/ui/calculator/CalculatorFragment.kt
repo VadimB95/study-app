@@ -11,7 +11,7 @@ import androidx.fragment.app.viewModels
 import com.a65apps.vbabikov.studyapp.databinding.FragmentCalculatorBinding
 import com.a65apps.vbabikov.studyapp.navigation.BackButtonListener
 import com.a65apps.vbabikov.studyapp.ui.calculator.viewstate.CalculatorViewState
-import com.a65apps.vbabikov.studyapp.utils.KeyboardUtils.showKeyboard
+import com.a65apps.vbabikov.studyapp.utils.KeyboardUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -37,12 +37,9 @@ class CalculatorFragment : Fragment(), BackButtonListener {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         setupViews()
         viewModel.viewState.observe(viewLifecycleOwner, ::handleState)
-
-        binding.edittextCalc.requestFocus()
-        showKeyboard(binding.edittextCalc)
+        KeyboardUtils.showKeyboard(binding.edittextCalc)
     }
 
     private fun setupViews() {
@@ -68,7 +65,6 @@ class CalculatorFragment : Fragment(), BackButtonListener {
             buttonCalcClear.setOnClickListener {
                 viewModel.clear()
             }
-
             calculatorTextWatcher = CalculatorTextWatcher(viewModel)
             edittextCalc.addTextChangedListener(calculatorTextWatcher)
         }

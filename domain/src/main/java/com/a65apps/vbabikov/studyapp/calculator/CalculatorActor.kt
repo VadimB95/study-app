@@ -2,6 +2,7 @@ package com.a65apps.vbabikov.studyapp.calculator
 
 import com.badoo.mvicore.element.Actor
 import io.reactivex.Observable
+import java.math.BigDecimal
 
 class CalculatorActor : Actor<CalculatorState, CalculatorAction, CalculatorEffect> {
 
@@ -19,9 +20,9 @@ class CalculatorActor : Actor<CalculatorState, CalculatorAction, CalculatorEffec
         )
 
         is CalculatorAction.ParseOperand1 -> {
-            var parsedOperand1 = 0.0
+            var parsedOperand1 = BigDecimal.ZERO
             try {
-                parsedOperand1 = state.screenText.toDouble()
+                parsedOperand1 = state.screenText.toBigDecimal()
             } catch (e: NumberFormatException) {
                 Observable.just(CalculatorEffect.ParseScreenTextError)
             }
@@ -43,7 +44,7 @@ class CalculatorActor : Actor<CalculatorState, CalculatorAction, CalculatorEffec
 
         CalculatorAction.ParseOperand2 -> {
             try {
-                val parsedOperand2 = state.screenText.toDouble()
+                val parsedOperand2 = state.screenText.toBigDecimal()
                 Observable.just(CalculatorEffect.Result(parsedOperand2))
             } catch (e: NumberFormatException) {
                 Observable.just(CalculatorEffect.ParseScreenTextError)
