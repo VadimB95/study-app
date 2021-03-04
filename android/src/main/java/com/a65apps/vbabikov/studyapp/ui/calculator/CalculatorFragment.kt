@@ -83,8 +83,9 @@ class CalculatorFragment : Fragment(), BackButtonListener {
 
     private fun handleState(viewState: CalculatorViewState) {
         with(binding) {
-            if (viewState.screenText != edittextCalc.text.toString())
+            if (viewState.screenText != edittextCalc.text.toString()) {
                 edittextCalc.setText(viewState.screenText)
+            }
             edittextCalc.setSelection(edittextCalc.text?.length ?: 0)
         }
     }

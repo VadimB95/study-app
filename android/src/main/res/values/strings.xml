@@ -4,10 +4,10 @@
     <string name="home_calc_button_label">2. Калькулятор</string>
     <string name="home_toolbar_title">Главный экран</string>
     <string name="calc_toolbar_title">Калькулятор</string>
-    <string name="calc_clear_button_label">C</string>
-    <string name="calc_add_button_label">+</string>
-    <string name="calc_sub_button_label">-</string>
-    <string name="calc_mult_button_label">×</string>
-    <string name="calc_div_button_label">÷</string>
-    <string name="calc_result_button_label">=</string>
+    <string name="clear">C</string>
+    <string name="add">+</string>
+    <string name="subtract">-</string>
+    <string name="multiply">×</string>
+    <string name="divide">÷</string>
+    <string name="result">=</string>
 </resources>

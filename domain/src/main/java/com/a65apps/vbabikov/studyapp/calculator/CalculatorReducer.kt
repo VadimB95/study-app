@@ -5,7 +5,7 @@ import java.math.BigDecimal
 import java.math.RoundingMode
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
-import java.util.*
+import java.util.Locale
 
 class CalculatorReducer : Reducer<CalculatorState, CalculatorEffect> {
 
@@ -86,9 +86,9 @@ class CalculatorReducer : Reducer<CalculatorState, CalculatorEffect> {
         effect: CalculatorEffect.Input
     ) = state.screenText == effect.screenTextInput
 
-    private fun formatResult(result: BigDecimal): String {
-        val df = DecimalFormat("#.########")
-        df.decimalFormatSymbols = DecimalFormatSymbols.getInstance(Locale.US)
-        return df.format(result)
-    }
+    private fun formatResult(result: BigDecimal) =
+        DecimalFormat("#.########").run {
+            decimalFormatSymbols = DecimalFormatSymbols.getInstance(Locale.US)
+            format(result)
+        }
 }
