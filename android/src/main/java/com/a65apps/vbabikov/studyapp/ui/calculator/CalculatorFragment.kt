@@ -39,7 +39,7 @@ class CalculatorFragment : Fragment(), BackButtonListener {
         super.onViewCreated(view, savedInstanceState)
         setupViews()
         viewModel.viewState.observe(viewLifecycleOwner, ::handleState)
-        KeyboardUtils.showKeyboard(binding.edittextCalc)
+        KeyboardUtils.showKeyboard(binding.editTextCalc)
     }
 
     private fun setupViews() {
@@ -66,7 +66,7 @@ class CalculatorFragment : Fragment(), BackButtonListener {
                 viewModel.clear()
             }
             calculatorTextWatcher = CalculatorTextWatcher(viewModel)
-            edittextCalc.addTextChangedListener(calculatorTextWatcher)
+            editTextCalc.addTextChangedListener(calculatorTextWatcher)
         }
     }
 
@@ -75,7 +75,7 @@ class CalculatorFragment : Fragment(), BackButtonListener {
     }
 
     override fun onDestroyView() {
-        binding.edittextCalc.removeTextChangedListener(calculatorTextWatcher)
+        binding.editTextCalc.removeTextChangedListener(calculatorTextWatcher)
         _binding = null
         calculatorTextWatcher = null
         super.onDestroyView()
@@ -83,10 +83,10 @@ class CalculatorFragment : Fragment(), BackButtonListener {
 
     private fun handleState(viewState: CalculatorViewState) {
         with(binding) {
-            if (viewState.screenText != edittextCalc.text.toString()) {
-                edittextCalc.setText(viewState.screenText)
+            if (viewState.screenText != editTextCalc.text.toString()) {
+                editTextCalc.setText(viewState.screenText)
             }
-            edittextCalc.setSelection(edittextCalc.text?.length ?: 0)
+            editTextCalc.setSelection(editTextCalc.text?.length ?: 0)
         }
     }
 

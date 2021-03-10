@@ -1,9 +1,8 @@
 <resources>
     <string name="app_name">Study App</string>
-    <string name="home_task1_title">1. Создание &quot;главного&quot; экрана</string>
     <string name="home_calc_button_label">2. Калькулятор</string>
-    <string name="home_toolbar_title">Главный экран</string>
-    <string name="calc_toolbar_title">Калькулятор</string>
+    <string name="home_screen">Главный экран</string>
+    <string name="calculator">Калькулятор</string>
     <string name="clear">C</string>
     <string name="add">+</string>
     <string name="subtract">-</string>
