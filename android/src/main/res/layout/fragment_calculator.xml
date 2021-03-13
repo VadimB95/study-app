@@ -7,7 +7,7 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_calc"
+        android:id="@+id/toolbarCalc"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -20,7 +20,7 @@
         android:layout_height="match_parent">
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textView_calc"
+            android:id="@+id/textViewCalc"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="8dp"
@@ -31,7 +31,7 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/editText_calc"
+                android:id="@+id/editTextCalc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:cursorVisible="false"
@@ -42,21 +42,21 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <Button
-            android:id="@+id/button_calc_clear"
+            android:id="@+id/buttonCalcClear"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
             android:layout_marginEnd="4dp"
             android:text="@string/clear"
             android:textAppearance="@style/CalculatorButtonText"
-            app:layout_constraintEnd_toStartOf="@+id/button_calc_add"
+            app:layout_constraintEnd_toStartOf="@+id/buttonCalcAdd"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintHorizontal_chainStyle="spread"
-            app:layout_constraintStart_toStartOf="@+id/textView_calc"
-            app:layout_constraintTop_toBottomOf="@+id/textView_calc" />
+            app:layout_constraintStart_toStartOf="@+id/textViewCalc"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCalc" />
 
         <Button
-            android:id="@+id/button_calc_add"
+            android:id="@+id/buttonCalcAdd"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -64,13 +64,13 @@
             android:layout_marginEnd="4dp"
             android:text="@string/add"
             android:textAppearance="@style/CalculatorButtonText"
-            app:layout_constraintEnd_toStartOf="@+id/button_calc_sub"
+            app:layout_constraintEnd_toStartOf="@+id/buttonCalcSub"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button_calc_clear"
-            app:layout_constraintTop_toBottomOf="@+id/textView_calc" />
+            app:layout_constraintStart_toEndOf="@+id/buttonCalcClear"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCalc" />
 
         <Button
-            android:id="@+id/button_calc_sub"
+            android:id="@+id/buttonCalcSub"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -78,13 +78,13 @@
             android:layout_marginEnd="4dp"
             android:text="@string/subtract"
             android:textAppearance="@style/CalculatorButtonText"
-            app:layout_constraintEnd_toStartOf="@+id/button_calc_mult"
+            app:layout_constraintEnd_toStartOf="@+id/buttonCalcMult"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button_calc_add"
-            app:layout_constraintTop_toBottomOf="@+id/textView_calc" />
+            app:layout_constraintStart_toEndOf="@+id/buttonCalcAdd"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCalc" />
 
         <Button
-            android:id="@+id/button_calc_mult"
+            android:id="@+id/buttonCalcMult"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -92,33 +92,33 @@
             android:layout_marginEnd="4dp"
             android:text="@string/multiply"
             android:textAppearance="@style/CalculatorButtonText"
-            app:layout_constraintEnd_toStartOf="@+id/button_calc_div"
+            app:layout_constraintEnd_toStartOf="@+id/buttonCalcDiv"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button_calc_sub"
-            app:layout_constraintTop_toBottomOf="@+id/textView_calc" />
+            app:layout_constraintStart_toEndOf="@+id/buttonCalcSub"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCalc" />
 
         <Button
-            android:id="@+id/button_calc_div"
+            android:id="@+id/buttonCalcDiv"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
             android:layout_marginTop="8dp"
             android:text="@string/divide"
             android:textAppearance="@style/CalculatorButtonText"
-            app:layout_constraintEnd_toEndOf="@+id/textView_calc"
+            app:layout_constraintEnd_toEndOf="@+id/textViewCalc"
             app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toEndOf="@+id/button_calc_mult"
-            app:layout_constraintTop_toBottomOf="@+id/textView_calc" />
+            app:layout_constraintStart_toEndOf="@+id/buttonCalcMult"
+            app:layout_constraintTop_toBottomOf="@+id/textViewCalc" />
 
         <Button
-            android:id="@+id/button_calc_result"
+            android:id="@+id/buttonCalcResult"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:text="@string/result"
             android:textAppearance="@style/CalculatorButtonText"
-            app:layout_constraintEnd_toEndOf="@+id/textView_calc"
-            app:layout_constraintStart_toStartOf="@+id/textView_calc"
-            app:layout_constraintTop_toBottomOf="@+id/button_calc_clear" />
+            app:layout_constraintEnd_toEndOf="@+id/textViewCalc"
+            app:layout_constraintStart_toStartOf="@+id/textViewCalc"
+            app:layout_constraintTop_toBottomOf="@+id/buttonCalcClear" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

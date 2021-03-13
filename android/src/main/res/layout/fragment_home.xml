@@ -6,7 +6,7 @@
     android:orientation="vertical">
 
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbar_home"
+        android:id="@+id/toolbarHome"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
@@ -20,7 +20,7 @@
         android:orientation="vertical">
 
         <Button
-            android:id="@+id/button_home_calc"
+            android:id="@+id/buttonHomeCalc"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/home_calc_button_label" />

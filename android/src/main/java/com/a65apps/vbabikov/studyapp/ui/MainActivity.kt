@@ -19,7 +19,7 @@ class MainActivity : AppCompatActivity() {
     @Inject
     lateinit var navigatorHolder: NavigatorHolder
 
-    private val navigator: Navigator = AppNavigator(this, R.id.main_container)
+    private val navigator: Navigator = AppNavigator(this, R.id.mainContainer)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +42,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        val fragment = supportFragmentManager.findFragmentById(R.id.main_container)
+        val fragment = supportFragmentManager.findFragmentById(R.id.mainContainer)
         if (fragment != null && fragment is BackButtonListener) {
             fragment.onBackPressed()
         } else {
