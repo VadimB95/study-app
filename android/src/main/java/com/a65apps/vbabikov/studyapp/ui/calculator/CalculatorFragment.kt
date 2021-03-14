@@ -8,9 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import com.a65apps.vbabikov.studyapp.calculator.CalculatorState
 import com.a65apps.vbabikov.studyapp.databinding.FragmentCalculatorBinding
 import com.a65apps.vbabikov.studyapp.navigation.BackButtonListener
-import com.a65apps.vbabikov.studyapp.ui.calculator.viewstate.CalculatorViewState
 import com.a65apps.vbabikov.studyapp.utils.KeyboardUtils
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -74,6 +74,11 @@ class CalculatorFragment : Fragment(), BackButtonListener {
         viewModel.navigateBack()
     }
 
+    override fun onStop() {
+        KeyboardUtils.hideKeyboard(binding.editTextCalc)
+        super.onStop()
+    }
+
     override fun onDestroyView() {
         binding.editTextCalc.removeTextChangedListener(calculatorTextWatcher)
         _binding = null
@@ -81,10 +86,10 @@ class CalculatorFragment : Fragment(), BackButtonListener {
         super.onDestroyView()
     }
 
-    private fun handleState(viewState: CalculatorViewState) {
+    private fun handleState(state: CalculatorState) {
         with(binding) {
-            if (viewState.screenText != editTextCalc.text.toString()) {
-                editTextCalc.setText(viewState.screenText)
+            if (state.screenText != editTextCalc.text.toString()) {
+                editTextCalc.setText(state.screenText)
             }
             editTextCalc.setSelection(editTextCalc.text?.length ?: 0)
         }

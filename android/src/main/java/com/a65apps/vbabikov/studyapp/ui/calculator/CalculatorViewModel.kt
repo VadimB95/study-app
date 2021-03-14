@@ -2,9 +2,9 @@ package com.a65apps.vbabikov.studyapp.ui.calculator
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.a65apps.vbabikov.studyapp.calculator.CalculatorState
 import com.a65apps.vbabikov.studyapp.calculator.CalculatorWish
 import com.a65apps.vbabikov.studyapp.common.ObservableSourceViewModel
-import com.a65apps.vbabikov.studyapp.ui.calculator.viewstate.CalculatorViewState
 import com.github.terrakok.cicerone.Router
 import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.functions.Consumer
@@ -14,17 +14,17 @@ import javax.inject.Inject
 class CalculatorViewModel @Inject constructor(
     private val router: Router,
     private val calcBinding: CalculatorBindings
-) : ObservableSourceViewModel<CalculatorWish>(), Consumer<CalculatorViewState> {
+) : ObservableSourceViewModel<CalculatorWish>(), Consumer<CalculatorState> {
 
-    private val mutableState = MutableLiveData<CalculatorViewState>()
-    val viewState: LiveData<CalculatorViewState>
+    private val mutableState = MutableLiveData<CalculatorState>()
+    val viewState: LiveData<CalculatorState>
         get() = mutableState
 
     init {
         calcBinding.setup(this)
     }
 
-    override fun accept(viewState: CalculatorViewState?) {
+    override fun accept(viewState: CalculatorState?) {
         viewState?.let {
             mutableState.postValue(it)
         }
