@@ -59,7 +59,7 @@ class CalculatorViewModel @Inject constructor(
     fun navigateBack() = router.exit()
 
     override fun onCleared() {
-        calcBinding.binder.dispose()
+        calcBinding.unbind()
         super.onCleared()
     }
 }

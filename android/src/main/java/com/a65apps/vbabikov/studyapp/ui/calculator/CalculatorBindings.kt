@@ -12,10 +12,14 @@ class CalculatorBindings @Inject constructor(
     private val feature: CalculatorFeature,
     private val viewStateTransformer: CalculatorViewStateTransformer
 ) {
-    val binder: Binder = Binder()
+    private val binder: Binder = Binder()
 
     fun setup(viewModel: CalculatorViewModel) {
         binder.bind(viewModel to feature)
         binder.bind(feature to viewModel using viewStateTransformer)
+    }
+
+    fun unbind() {
+        binder.dispose()
     }
 }

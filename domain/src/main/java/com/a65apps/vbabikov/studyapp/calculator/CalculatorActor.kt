@@ -2,7 +2,6 @@ package com.a65apps.vbabikov.studyapp.calculator
 
 import com.badoo.mvicore.element.Actor
 import io.reactivex.Observable
-import java.math.BigDecimal
 
 class CalculatorActor : Actor<CalculatorState, CalculatorAction, CalculatorEffect> {
 
@@ -20,25 +19,25 @@ class CalculatorActor : Actor<CalculatorState, CalculatorAction, CalculatorEffec
         )
 
         is CalculatorAction.ParseOperand1 -> {
-            var parsedOperand1 = BigDecimal.ZERO
             try {
-                parsedOperand1 = state.screenText.toBigDecimal()
+                val parsedOperand1 = state.screenText.toBigDecimal()
+
+                when (action.pendingOperation) {
+                    ArithmeticOperations.ADD -> Observable.just(
+                        CalculatorEffect.Add(parsedOperand1)
+                    )
+                    ArithmeticOperations.SUBTRACT -> Observable.just(
+                        CalculatorEffect.Subtract(parsedOperand1)
+                    )
+                    ArithmeticOperations.MULTIPLY -> Observable.just(
+                        CalculatorEffect.Multiply(parsedOperand1)
+                    )
+                    ArithmeticOperations.DIVIDE -> Observable.just(
+                        CalculatorEffect.Divide(parsedOperand1)
+                    )
+                }
             } catch (e: NumberFormatException) {
                 Observable.just(CalculatorEffect.ParseScreenTextError)
-            }
-            when (action.pendingOperation) {
-                ArithmeticOperations.ADD -> Observable.just(
-                    CalculatorEffect.Add(parsedOperand1)
-                )
-                ArithmeticOperations.SUBTRACT -> Observable.just(
-                    CalculatorEffect.Subtract(parsedOperand1)
-                )
-                ArithmeticOperations.MULTIPLY -> Observable.just(
-                    CalculatorEffect.Multiply(parsedOperand1)
-                )
-                ArithmeticOperations.DIVIDE -> Observable.just(
-                    CalculatorEffect.Divide(parsedOperand1)
-                )
             }
         }
 
